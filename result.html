@@ -76,67 +76,101 @@ document.addEventListener('DOMContentLoaded', function() {
   var search_term = searchParams.get('search_term');
 
   // Create an array of file names
-  var fileNames = ['jsondata/Twitter.json','jsondata/Truecaller.json','jsondata/Instagram.json','jsondata/Paytm.json','jsondata/Zomato.json',
-                          'jsondata/InstaBet.json','jsondata/BigBasket.json'];
+  var fileNames = ['jsondata/Twitter.json', 'jsondata/Truecaller.json', 'jsondata/Instagram.json', 'jsondata/Paytm.json', 'jsondata/Zomato.json', 'jsondata/InstaBet.json', 'jsondata/BigBasket.json'];
+
+  // Create an array to hold the promises
+  var promises = [];
 
   // Iterate over each file
   for (var i = 0; i < fileNames.length; i++) {
     var fileName = fileNames[i];
 
-    // Read the file using AJAX
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        // Parse the JSON data
-        var jsonData = JSON.parse(this.responseText);
+    // Create a promise for each request
+    var promise = new Promise(function(resolve, reject) {
+      // Read the file using AJAX
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // Parse the JSON data
+          var jsonData = JSON.parse(this.responseText);
 
-        // Search for the search term in the JSON data
-        var results = [];
-        for (var j = 0; j < jsonData.length; j++) {
-          var item = jsonData[j];
-          if (typeof item === 'object') {
-            var hasData = false;
-            for (var key in item) {
-              if (item.hasOwnProperty(key) && item[key].includes(search_term)) {
-                hasData = true;
-                break;
+          // Search for the search term in the JSON data
+          var results = [];
+          for (var j = 0; j < jsonData.length; j++) {
+            var item = jsonData[j];
+            if (typeof item === 'object') {
+              var hasData = false;
+              for (var key in item) {
+                if (item.hasOwnProperty(key) && item[key].includes(search_term)) {
+                  hasData = true;
+                  break;
+                }
               }
-            }
-            if (hasData) {
-              results.push(item);
-            }
-          }
-        }
-
-        // Create a table for the search results
-        if (results.length > 0) {
-          var html = '<h2>' + fileName + '</h2>';
-          html += '<table>';
-          html += '<thead><tr><th>Property</th><th>Value</th></tr></thead>';
-          html += '<tbody>';
-
-          // Loop through each property and create a row for each key-value pair
-          for (var j = 0; j < results.length; j++) {
-            for (var key in results[j]) {
-              if (results[j].hasOwnProperty(key) && results[j][key] !== '') {
-                html += '<tr><td>' + key + '</td><td>' + results[j][key] + '</td></tr>';
+              if (hasData) {
+                results.push(item);
               }
             }
           }
 
-          html += '</tbody></table>';
+          // Create a table for the search results
+          if (results.length > 0) {
+            var fileNameWithoutPath = extractFileNameFromPath(fileName).replace('.json', '');
+            var html = '<div style="text-align:center;"><h2>' + fileNameWithoutPath + '</h2></div>';
+            html += '<style>table {width: 80%; margin: 0 auto; border-collapse: collapse;} th, td {padding: 8px; text-align: left; border: 1px solid #ddd;} th {background-color: #f2f2f2;}</style>';
+            html += '<table>';
+            html += '<thead><tr><th></th><th>Data</th></tr></thead>';
+            html += '<tbody>';
 
-          // Check if the results div exists before setting its innerHTML property
-          var resultsDiv = document.getElementById('results');
-          if (resultsDiv) {
-            resultsDiv.innerHTML += html;
+            // Loop through each property and create a row for each key-value pair
+            for (var j = 0; j < results.length; j++) {
+              for (var key in results[j]) {
+                if (results[j].hasOwnProperty(key) && results[j][key] !== '') {
+                  html += '<tr><td>' + key + '</td><td>' + results[j][key] + '</td></tr>';
+                }
+              }
+            }
+
+            html += '</tbody></table>';
+
+            // Resolve the promise with the HTML for the table
+            resolve(html);
+          } else {
+            // Resolve the promise with an empty string if there are no results
+            resolve('');
           }
         }
-      }
-    };
-    xhttp.open('GET', fileName, true);
-    xhttp.send();
+      };
+      xhttp.open('GET', fileName, true);
+      xhttp.send();
+    });
+
+    // Add the promise to the array
+    promises.push(promise);
   }
+
+ // Use Promise.all() to wait for all promises to resolve
+Promise.all(promises).then(function(htmlArray) {
+  var resultsDiv = document.getElementById('results');
+
+  // Concatenate all HTML strings into one
+  var allHtml = htmlArray.join('');
+
+  // Add the HTML to the results div
+  resultsDiv.innerHTML = allHtml;
+
+  // Get all the table headers and modify their text content to change the table name
+  var tableHeaders = document.querySelectorAll('h2');
+  for (var i = 0; i < tableHeaders.length; i++) {
+    var fileName = extractFileNameFromPath(fileNames[i]);
+    fileName = fileName.replace('.json', ''); // Remove the .json extension
+    tableHeaders[i].textContent = fileName;
+  }
+});
+
+// Extract the file name from the file path
+function extractFileNameFromPath(filePath) {
+  return filePath.split('/').pop();
+}
 });
 
 	</script>
