@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+  table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+
+   .navbar-brand {
+    display: flex;
+    align-items: center;
+    }
+  
+  .edlogo {
+    width: 120px; 
+    margin-left: 1050px;
+    }
+  
+  
+  .logos-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+  
+  
+  .edlogo img {
+    margin-left: -50;
+    width: 130px;
+    height: auto;
+    }
+  
+  .dinologo img {
+    filter: invert(100%);
+    width: 200px;
+    height: auto;
+    margin-left: 50px
+    }
+  
+
+  body {
+    font-family: Georgia, serif; 
+  }
+	</style>
+</head>
+<body>
+    <div class="logos-container">
+        <div class="dinologo">
+          <img src="static/cropped-Dinosys.png" alt="navbar brand">
+        </div>
+        <div class="edlogo">
+          <img src="static/edlogo.svg">
+        </div>
+        </div>
+  
+	<h1>Search Results</h1>
+	<div id="results"></div>
+
+	<script>
+	// Wait for the DOM to load
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the search term from the query string
+  var searchParams = new URLSearchParams(window.location.search);
+  var search_term = searchParams.get('search_term');
+
+  // Create an array of file names
+  var fileNames = ['jsondata/Twitter.json','jsondata/Truecaller.json','jsondata/Instagram.json','jsondata/Paytm.json','jsondata/Zomato.json',
+                          'jsondata/InstaBet.json','jsondata/BigBasket.json'];
+
+  // Iterate over each file
+  for (var i = 0; i < fileNames.length; i++) {
+    var fileName = fileNames[i];
+
+    // Read the file using AJAX
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        // Parse the JSON data
+        var jsonData = JSON.parse(this.responseText);
+
+        // Search for the search term in the JSON data
+        var results = [];
+        for (var j = 0; j < jsonData.length; j++) {
+          var item = jsonData[j];
+          if (typeof item === 'object') {
+            var hasData = false;
+            for (var key in item) {
+              if (item.hasOwnProperty(key) && item[key].includes(search_term)) {
+                hasData = true;
+                break;
+              }
+            }
+            if (hasData) {
+              results.push(item);
+            }
+          }
+        }
+
+        // Create a table for the search results
+        if (results.length > 0) {
+          var html = '<h2>' + fileName + '</h2>';
+          html += '<table>';
+          html += '<thead><tr><th>Property</th><th>Value</th></tr></thead>';
+          html += '<tbody>';
+
+          // Loop through each property and create a row for each key-value pair
+          for (var j = 0; j < results.length; j++) {
+            for (var key in results[j]) {
+              if (results[j].hasOwnProperty(key) && results[j][key] !== '') {
+                html += '<tr><td>' + key + '</td><td>' + results[j][key] + '</td></tr>';
+              }
+            }
+          }
+
+          html += '</tbody></table>';
+
+          // Check if the results div exists before setting its innerHTML property
+          var resultsDiv = document.getElementById('results');
+          if (resultsDiv) {
+            resultsDiv.innerHTML += html;
+          }
+        }
+      }
+    };
+    xhttp.open('GET', fileName, true);
+    xhttp.send();
+  }
+});
+
+	</script>
+</body>
+</html>

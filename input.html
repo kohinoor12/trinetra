@@ -1,0 +1,374 @@
+
+<style>
+
+    @media only screen and (min-width: 768px){
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        }
+    
+    .edlogo {
+        width: 120px; 
+        margin-left: 1050px;
+        }
+    
+    
+    .logos-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+    
+    
+    .edlogo img {
+        margin-left: -50;
+        width: 130px;
+        height: auto;
+        }
+    
+    .dinologo img {
+        filter: invert(100%);
+        width: 200px;
+        height: auto;
+        margin-left: 50px
+        }
+        
+        .slider-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            height: 50px;
+            border-radius: 25px;
+            padding: 5px;
+          }
+          
+          .slider-button {
+            width: 120px;
+            height: 40px;
+            margin: 05px;
+            border-radius: 10px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+          }
+          
+          .slider-button.phone {
+            color: #a32a22;
+            border: 2px solid #a32a22;
+          }
+          
+          .slider-button.email {
+            color: #a32a22;
+            border: 2px solid #a32a22;
+          }
+          
+          .slider-button.active.phone {
+            background-color: #a32a22;
+            color: #fff;
+          }
+          
+          .slider-button.active.email {
+            background-color: #a32a22;
+            color: #fff;
+          }
+          
+          .slider-button:active {
+            transform: scale(0.95);
+          }
+          
+          .input-fields {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+          }
+          
+          .input-field {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: -30px;
+          }
+          
+          .input-field input {
+            width: 100%;
+            max-width: 250px;
+            height: 30px;
+            margin-top: 5px;
+            padding: 5px;
+            border: 2px solid #ccc;
+            outline: none;
+          }
+    
+          .result {
+            margin-left: 670px;
+            margin-top: 50px;
+          }
+    
+          .submit {
+            margin-left: 170px;
+            margin-top: 15px;
+            color: #962018;
+            border: 2px solid #a32a22;
+            background-color: #a32a22;
+            color: #fff;
+            margin: 5px;
+            width: 20%;
+            height: 40px;
+            border-radius: 25px;
+            padding: 5px;
+            margin-left: 150px;
+          }
+    
+          h2 {
+            font-family: Georgia, serif;
+          }
+    
+    
+    .card-color-body {
+    padding: 20px;
+    text-align: center;
+    background-color: #a32a22;
+    margin-bottom: -50px;
+    border-radius: 5px;
+    }
+    
+    .card, .card-light {
+        border-radius: 5px;
+        background-color: #ffffff;
+        margin-bottom: 30px;
+        -webkit-box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.3);
+        -moz-box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.3);
+        box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.3);
+        border: 0px; 
+        width: 30%;
+    margin-left: 500px;
+    margin-top: 50px;
+    }
+        .card .card-header, .card-light .card-header {
+        padding: 1rem 1.25rem;
+        background-color: transparent;
+        border-bottom: 1px solid #ebecec !important; }
+        .card .card-header:first-child, .card-light .card-header:first-child {
+            border-radius: 0px; }
+        .card .card-header .card-head-row, .card-light .card-header .card-head-row {
+            display: flex;
+            align-items: center; }
+            .card .card-header .card-head-row .card-tools, .card-light .card-header .card-head-row .card-tools {
+            margin-left: auto;
+            float: right;
+            padding-left: 15px; }
+        .card .separator-solid, .card-light .separator-solid {
+        border-top: 1px solid #ebecec;
+        margin: 15px 0; }
+        .card .separator-dashed, .card-light .separator-dashed {
+        border-top: 1px dashed #ebecec;
+        margin: 15px 0; }
+        .card .separator-dot, .card-light .separator-dot {
+        border-top: 1px dotted #ebecec;
+        margin: 15px 0; }
+        .card .full-width-separator, .card-light .full-width-separator {
+        margin: 15px -20px 15px; }
+        .card .b-b1, .card-light .b-b1 {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+        .card .card-body, .card-light .card-body {
+        padding: 1.25rem; }
+        .card .card-footer, .card-light .card-footer {
+        background-color: transparent;
+        line-height: 30px;
+        border-top: 1px solid #ebecec !important;
+        font-size: 13px; }
+        .card .pull-in, .card-light .pull-in {
+        margin-left: -1.25rem;
+        margin-right: -1.25rem; }
+        .card .pull-in.sparkline-fix, .card-light .pull-in.sparkline-fix {
+            margin-left: -1.35rem;
+            margin-right: -1.35rem;
+            margin-bottom: -3px; }
+        .card .chart-as-background, .card-light .chart-as-background {
+        position: absolute;
+        bottom: 0;
+        width: calc(100% + 2px); }
+        .card .card-action, .card-light .card-action {
+        padding: 30px;
+        background-color: transparent;
+        line-height: 30px;
+        border-top: 1px solid #ebecec !important;
+        font-size: 14px; }
+        .card .card-footer hr, .card-light .card-footer hr {
+        margin-top: 5px;
+        margin-bottom: 5px; }
+        .card .card-footer .legend, .card-light .card-footer .legend {
+        display: inline-block; }
+    
+    
+        label {
+          font-size: 14px;
+          font-weight: 400;
+          color: #8d9498;
+          margin-bottom: 0px; }
+    
+    .app-name {
+        margin-left: 580px;
+        margin-top: -60px;
+    }
+    
+    .app-name h2 {
+        font-family: Georgia, serif;
+        font-size: 3em;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #a32a22;
+        text-shadow: 
+          -1px -1px 0 #b3ac30,
+          1px -1px 0 #b3ac30,
+          -1px 1px 0 #b3ac30,
+          1px 1px 0 #b3ac30;
+      }
+    
+      .large-font {
+        font-size: 50px;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+      }
+    
+      .button-box  {
+        margin-left: 50px;
+      }
+    
+      .search-box {
+        font-size: 11px;
+        padding: 10px;
+        width: 200px;
+        border-radius: 5px;
+      }
+    
+      .card-small-height {
+      height: 0.5px !important; 
+    }
+    
+    .btn {
+        background-color: white;
+        color: white;
+        border: none;
+        padding: 7px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      .btn:hover {
+        background-color: #f59c87;
+      }
+    
+    }
+    
+    
+    </style>
+    
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    </head>
+      
+    
+    <div class="logos-container">
+        <div class="dinologo">
+            <img src="static/cropped-Dinosys.png" alt="navbar brand">
+        </div>
+        <div class="edlogo">
+            <img src="static/edlogo.svg">
+        </div>
+        </div>
+    
+    <div class="app-name">
+        <h2><span class="large-font">24</span>Trinetra</h2>
+    </div>
+    
+    <div class="card card-background">
+        <div class="card-body card-color-body">
+            
+            </div>
+        </div>
+    </div>
+
+        <div class="card">
+            <div class="card-body">
+            <div class="slider-buttons">
+                <button class="slider-button phone active" data-target="#phone-input">Phone</button>
+                <button class="slider-button email" data-target="#email-input">Email</button>
+            </div>
+            
+        <div class="input-fields">
+        <div class="input-field" id="phone-input">
+            <input type="text" placeholder="Enter Phone" / name="search_term">
+        </div>
+        <div class="input-field" id="email-input" style="display: none;">
+            <input type="text" placeholder="Enter Email" / name="search_term">
+    </div>
+    </div>
+    <button type="submit" class="submit" onclick="search()">Submit</button>
+    </div>
+    </div>
+    
+
+    
+    
+    <div class='result'>
+        <h2>Result<h2>
+    </div>
+    
+    <div class="card card-background">
+        <div class="card-body card-color-body card-small-height">
+            
+            </div>
+        </div>
+    </div>
+    
+        <div class="card">
+            <div class="card-body">
+                <div class='button-box'>
+                <input type="search" placeholder="Search" class='search-box'>
+                <button class="btn">
+                    <i class="fas fa-file-pdf" style="color: #a32a22;"></i>
+                  </button>	
+                  <button class="btn">
+                    <i class="fas fa-file-excel" style="color: green;"></i>
+                  </button>	
+                  <button class="btn">	
+                      <i class="fas fa-trash-alt" style="color: #a32a22;"></i>
+                </button>
+                <div>	
+            </div>
+        </div>
+    
+    
+    
+    <script>
+        
+    const phoneButton = document.querySelector('.slider-button.phone');
+    const emailButton = document.querySelector('.slider-button.email');
+    const phoneInput = document.querySelector('#phone-input');
+    const emailInput = document.querySelector('#email-input');
+    
+    phoneButton.addEventListener('click', () => {
+      phoneButton.classList.add('active');
+      emailButton.classList.remove('active');
+      phoneInput.style.display = 'flex';
+      emailInput.style.display = 'none';
+    });
+    
+    emailButton.addEventListener('click', () => {
+      emailButton.classList.add('active');
+      phoneButton.classList.remove('active');
+      emailInput.style.display = 'flex';
+      phoneInput.style.display = 'none';
+    });
+    </script>
+
+<script>
+    function search() {
+        var search_term = document.getElementsByName("search_term")[0].value;
+        window.location.href = `result.html?search_term=${search_term}`;
+    }
+</script>
